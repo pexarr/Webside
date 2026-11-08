@@ -1,0 +1,62 @@
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ara Tatil Sayacı</title>
+
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #000;
+  color: white;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, sans-serif;
+}
+
+#timer {
+  font-size: clamp(35px, 10vw, 90px);
+  font-weight: bold;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+</style>
+</head>
+
+<body>
+
+<div id="timer">00:00:00:00</div>
+
+<script>
+const hedef = new Date(2026, 10, 16, 0, 0, 0).getTime();
+
+function guncelle() {
+  let kalan = Math.max(0, hedef - Date.now());
+
+  let gun = Math.floor(kalan / 86400000);
+  let saat = Math.floor((kalan % 86400000) / 3600000);
+  let dakika = Math.floor((kalan % 3600000) / 60000);
+  let saniye = Math.floor((kalan % 60000) / 1000);
+
+  const iki = n => String(n).padStart(2, "0");
+
+  document.getElementById("timer").textContent =
+    `${iki(gun)}:${iki(saat)}:${iki(dakika)}:${iki(saniye)}`;
+}
+
+guncelle();
+setInterval(guncelle, 250);
+</script>
+
+</body>
+</html>
+  
